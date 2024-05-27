@@ -31,3 +31,6 @@ lspconfig.volar.setup {
     },
   },
 }
+
+-- python
+require'lspconfig'.jedi_language_server.setup{}
