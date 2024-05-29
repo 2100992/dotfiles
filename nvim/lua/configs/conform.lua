@@ -7,6 +7,7 @@ local options = {
 		javascript = { { "prettierd", "prettier" } },
 		typescript = { { "prettierd", "prettier" } },
 		vue = { { "prettierd", "prettier" } },
+		yaml = { { "prettierd", "prettier" } },
 	},
 
 	-- format_on_save = {
