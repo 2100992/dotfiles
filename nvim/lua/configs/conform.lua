@@ -4,10 +4,22 @@ local options = {
 		css = { "prettierd" },
 		html = { "prettierd" },
 		python = { "isort", "autopep8" },
-		javascript = { { "prettierd", "prettier" } },
-		typescript = { { "prettierd", "prettier" } },
-		vue = { { "prettierd", "prettier" } },
-		yaml = { { "prettierd", "prettier" } },
+		javascript = {
+			"prettierd",
+			-- { "prettierd", "prettier" }
+		},
+		typescript = {
+			"prettierd",
+			-- { "prettierd", "prettier" }
+		},
+		vue = {
+			"prettierd",
+			-- { "prettierd", "prettier" }
+		},
+		yaml = {
+			"prettierd",
+			-- { "prettierd", "prettier" },
+		},
 	},
 
 	format_on_save = {

@@ -6,12 +6,12 @@ local M = {}
 
 M.ui = {
 	theme = "onenord",
-	theme_toggle = { "onenord", "onenord_light" },
+	theme_toggle = { "onenord", "onenord" },
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+	-- 	["@comment"] = { italic = true },
+	-- },
 }
 
 return M
