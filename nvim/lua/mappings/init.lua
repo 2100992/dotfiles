@@ -9,3 +9,4 @@ map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 require("mappings.dap")
+require("mappings.codeium")
