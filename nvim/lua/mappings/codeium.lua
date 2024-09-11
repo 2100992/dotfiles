@@ -1,13 +1,9 @@
-require("nvchad.mappings")
-
 -- disable default codeium bindings
 vim.g.codeium_disable_bindings = 1
 
 local map = vim.keymap.set
 
--- map("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>")
-
-map("i", "<C-enter>", function()
+map("i", "<M-enter>", function()
 	return vim.fn["codeium#Accept"]()
 end, { expr = true, silent = true })
 

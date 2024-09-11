@@ -12,6 +12,18 @@ M.ui = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
 	-- },
+	statusline = {
+		theme = "vscode_colored",
+		-- theme = "minimal",
+		-- theme = "default",
+		-- modules = {
+		-- 	-- The default cursor module is override
+		-- 	cursor = function()
+		-- 		return "%#BruhHl#" .. " bruh " -- the highlight group here is BruhHl,
+		-- 	end,
+		-- },
+		-- separator_style = "arrow",
+	},
 }
 
 return M
