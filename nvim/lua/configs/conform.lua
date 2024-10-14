@@ -3,6 +3,7 @@ local options = {
 		lua = { "stylua" },
 		css = { "prettierd" },
 		html = { "prettierd" },
+		json = { "prettierd", "prettier", "fixjson" },
 		python = { "isort", "autopep8" },
 		javascript = {
 			"prettierd",
