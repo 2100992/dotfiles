@@ -68,3 +68,17 @@ lspconfig.pyright.setup({})
 --     }
 --   }
 -- }
+
+lspconfig.docker_compose_language_service.setup({})
+
+lspconfig.dockerls.setup({
+	settings = {
+		docker = {
+			languageserver = {
+				formatter = {
+					ignoreMultilineInstructions = true,
+				},
+			},
+		},
+	},
+})
