@@ -39,3 +39,4 @@ vim.schedule(function()
 end)
 
 require("diffview").setup()
+require("gitsigns").setup()

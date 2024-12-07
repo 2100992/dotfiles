@@ -21,6 +21,9 @@ local options = {
 			"prettierd",
 			-- { "prettierd", "prettier" },
 		},
+		bash = {
+			"beautysh",
+		},
 	},
 
 	format_on_save = {
