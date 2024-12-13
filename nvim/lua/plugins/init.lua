@@ -107,19 +107,4 @@ return {
 			require("configs.dap")
 		end,
 	},
-	-- {
-	-- 	"Exafunction/codeium.vim",
-	-- 	event = "BufEnter",
-	-- },
-	{
-		"Exafunction/codeium.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-		},
-		config = function()
-			require("codeium").setup({})
-		end,
-		event = "BufEnter",
-	},
 }

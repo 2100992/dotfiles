@@ -8,10 +8,6 @@ M.ui = {
 	theme = "onenord",
 	theme_toggle = { "onenord", "onenord" },
 
-	statusline = {
-		theme = "vscode_colored",
-	},
-
 	-- hl_override = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },
