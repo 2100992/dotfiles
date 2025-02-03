@@ -49,7 +49,7 @@ ai.setup({
 	--provider = "gemini",
 	--provider = "mistral",
 	-- provider = "anthropic",
-	provider = "deepseek",
+	provider = "gigachat",
 	--provider = "groq",
 	--provider = "cohere",
 })
