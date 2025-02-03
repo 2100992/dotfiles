@@ -159,7 +159,7 @@ return {
 		event = "BufEnter",
 	},
 	{
-		"2100992/nvim.ai",
+		"magicalne/nvim.ai",
 		version = "*",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
