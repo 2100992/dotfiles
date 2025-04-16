@@ -159,7 +159,7 @@ return {
 		event = "BufEnter",
 	},
 	{
-		"magicalne/nvim.ai",
+		"2100992/nvim.ai",
 		version = "*",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -167,8 +167,8 @@ return {
 		},
 		opts = {
 			provider = "gigachat", -- You can configure your provider, model or keymaps here.
-      debug=true,
-      insecure=true,
+			debug = true,
+			insecure = true,
 			-- ..
 			-- Keymaps
 			keymaps = {
