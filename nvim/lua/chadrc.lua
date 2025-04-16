@@ -5,13 +5,6 @@
 local M = {}
 
 M.ui = {
-	theme = "onenord",
-	theme_toggle = { "onenord", "onenord" },
-
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
 	statusline = {
 		theme = "vscode_colored",
 		-- theme = "minimal",
@@ -25,5 +18,21 @@ M.ui = {
 		-- separator_style = "arrow",
 	},
 }
+M.base46 = {
+	theme = "ayu_dark",
+	theme_toggle = { "ayu_dark", "ayu_light" },
+
+	-- hl_override = {
+	-- 	Comment = { italic = true },
+	-- 	["@comment"] = { italic = true },
+	-- },
+}
+
+-- M.nvdash = { load_on_startup = true }
+-- M.ui = {
+--       tabufline = {
+--          lazyload = false
+--      }
+--}
 
 return M

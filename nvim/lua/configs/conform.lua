@@ -24,6 +24,9 @@ local options = {
 		bash = {
 			"beautysh",
 		},
+		toml = {
+			"taplo",
+		},
 	},
 
 	format_on_save = {

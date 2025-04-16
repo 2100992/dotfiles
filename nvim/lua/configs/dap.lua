@@ -36,3 +36,16 @@ table.insert(dap.configurations.python, {
 	-- console = "integratedTerminal",
 	console = "externalTerminal",
 })
+
+-- table.insert(dap.configurations.typescript, {
+--     name = "TypeScript: Launch",
+--     type = "typescript",
+--     request = "launch",
+--     program = "${file}",  -- Replace with your main TypeScript file
+--     args = {"--inspect"},  -- Enable inspection in the debugger (optional)
+--     justMyCode = false,  -- Allow debugging of third-party libraries
+--     cwd = "${workspaceRoot}",  -- Set working directory to the root folder of your project
+--     runtimeArgs = ["--max-old-space-size=4096"],  -- Optional: Adjust memory usage
+--     sourceMaps = true,  -- Enable source maps for better debugging experience
+--     console = "integratedTerminal",  -- Choose where to display output (e.g., integrated terminal)
+-- })
