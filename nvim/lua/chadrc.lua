@@ -1,5 +1,6 @@
--- This file  needs to have same structure as nvconfig.lua
--- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
+-- This file needs to have same structure as nvconfig.lua
+-- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
+-- Please read that file to know all available options :(
 
 ---@type ChadrcConfig
 local M = {}
@@ -7,15 +8,9 @@ local M = {}
 M.ui = {
 	statusline = {
 		theme = "vscode_colored",
-		-- theme = "minimal",
-		-- theme = "default",
-		-- modules = {
-		-- 	-- The default cursor module is override
-		-- 	cursor = function()
-		-- 		return "%#BruhHl#" .. " bruh " -- the highlight group here is BruhHl,
-		-- 	end,
-		-- },
-		-- separator_style = "arrow",
+	},
+	{
+		lazyload = false,
 	},
 }
 M.base46 = {
@@ -30,9 +25,6 @@ M.base46 = {
 
 -- M.nvdash = { load_on_startup = true }
 -- M.ui = {
---       tabufline = {
---          lazyload = false
---      }
---}
+--       tabufline--}
 
 return M
