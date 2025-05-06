@@ -37,6 +37,15 @@ table.insert(dap.configurations.python, {
 	console = "externalTerminal",
 })
 
+table.insert(dap.configurations.python, {
+	type = "python",
+	request = "launch",
+	name = "Python: pytest",
+	module = "pytest",
+	args = {},
+	justMyCode = true,
+})
+
 -- table.insert(dap.configurations.typescript, {
 --     name = "TypeScript: Launch",
 --     type = "typescript",
