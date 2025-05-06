@@ -33,8 +33,8 @@ table.insert(dap.configurations.python, {
 	-- env = {},
 	justMyCode = true,
 	-- console = "internalConsole",
-	-- console = "integratedTerminal",
-	console = "externalTerminal",
+	console = "integratedTerminal",
+	-- console = "externalTerminal",
 })
 
 table.insert(dap.configurations.python, {
