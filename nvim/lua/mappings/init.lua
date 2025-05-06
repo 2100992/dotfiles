@@ -7,6 +7,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>do", "<cmd>DiffviewOpen<CR>", { desc = "Diffview open" })
 map("n", "<leader>dc", "<cmd>DiffviewClose<CR>", { desc = "Diffview close" })
 map("i", "jk", "<ESC>")
+map("i", "ол", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 require("mappings.dap")
