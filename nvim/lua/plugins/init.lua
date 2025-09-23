@@ -14,21 +14,28 @@ return {
 			require("configs.lspconfig")
 		end,
 	},
-
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		opts = {
 			ensure_installed = {
-				"lua-language-server",
 				"stylua",
 				"html-lsp",
 				"css-lsp",
-				"prettier",
-				"debugpy",
+				"pyright",
+				"docker_compose_language_service",
+				"dockerls",
+				"vue_ls",
+				"vtsls",
+			},
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
 			},
 		},
 	},
-
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
@@ -194,5 +201,8 @@ return {
 			require("langmapper").setup({--[[ your config ]]
 			})
 		end,
+	},
+	{
+		"petobens/poet-v",
 	},
 }

@@ -30,24 +30,8 @@ dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
 require("options")
-require("nvchad.autocmds")
+require("nvchad/autocmds")
 
 vim.schedule(function()
 	require("mappings")
 end)
-
-require("diffview").setup()
-require("gitsigns").setup()
-
-local ai = require("ai")
-ai.setup({
-	--provider = "snova",
-	--provider = "hyperbolic",
-	--provider = "cerebras",
-	--provider = "gemini",
-	--provider = "mistral",
-	-- provider = "anthropic",
-	provider = "gigachat",
-	--provider = "groq",
-	--provider = "cohere",
-})

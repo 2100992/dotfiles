@@ -14,7 +14,7 @@ lint.linters_by_ft = {
 	-- typescriptreact = { { "eslint_d", "eslint" } },
 	-- svelte = { "eslint_d" },
 	python = { "flake8" },
-	["*"] = { "codespell" },
+	["*"] = { "cspell", "codespell" },
 }
 local pattern = "[^:]+:(%d+):(%d+):(%w+):(.+)"
 local groups = { "lnum", "col", "code", "message" }
