@@ -173,7 +173,7 @@ return {
 		},
 		opts = {
 			provider = "gigachat", -- You can configure your provider, model or keymaps here.
-			debug = true,
+			-- debug = true,
 			insecure = true,
 			-- ..
 			-- Keymaps
@@ -203,6 +203,15 @@ return {
 		end,
 	},
 	{
-		"petobens/poet-v",
+		"richardhapb/pytest.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = {}, -- Define the options here
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "python", "xml" },
+			})
+
+			require("pytest").setup(opts)
+		end,
 	},
 }
