@@ -9,6 +9,10 @@ map("n", "<leader>dc", "<cmd>DiffviewClose<CR>", { desc = "Diffview close" })
 map("i", "jk", "<ESC>")
 map("i", "олол", "<ESC>")
 
+map("n", "K", function()
+	vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
+end, { desc = "Hover documentation" })
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 require("mappings.dap")
 -- require("mappings.codeium")

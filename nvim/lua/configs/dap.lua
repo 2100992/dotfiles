@@ -44,6 +44,9 @@ table.insert(dap.configurations.python, {
 	module = "pytest",
 	args = {},
 	justMyCode = true,
+	breakpoints = {
+		exception_breakpoints = { "raised" },
+	},
 })
 
 -- table.insert(dap.configurations.typescript, {
