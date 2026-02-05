@@ -13,6 +13,10 @@ map("n", "K", function()
 	vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
 end, { desc = "Hover documentation" })
 
+map("n", "<leader>gnh", "<cmd>Gitsigns next_hunk<CR>", { desc = "next_hunk" })
+map("n", "<leader>gph", "<cmd>Gitsigns prev_hunk<CR>", { desc = "prev_hunk" })
+map("n", "<leader>gh", "<cmd>Gitsigns preview_hunk_inline<CR>", { desc = "prev_hunk" })
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 require("mappings.dap")
 -- require("mappings.codeium")
