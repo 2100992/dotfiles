@@ -49,6 +49,11 @@ return {
 				"vue",
 				"typescript",
 				"javascript",
+				"json",
+				"yaml",
+				"bash",
+				"toml",
+				"xml",
 			},
 			auto_install = true,
 		},
@@ -172,7 +177,7 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
-			provider = "gigachat", -- You can configure your provider, model or keymaps here.
+			-- provider = "gigachat", -- You can configure your provider, model or keymaps here.
 			-- debug = true,
 			insecure = true,
 			-- ..
@@ -207,9 +212,9 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {}, -- Define the options here
 		config = function(_, opts)
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "python", "xml" },
-			})
+			-- require("nvim-treesitter.configs").setup({
+			-- 	ensure_installed = { "python", "xml" },
+			-- })
 
 			require("pytest").setup(opts)
 		end,
