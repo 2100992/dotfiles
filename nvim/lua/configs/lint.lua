@@ -10,10 +10,6 @@ lint.linters_by_ft = {
 	vue = {
 		"eslint_d",
 	},
-	-- javascriptreact = { { "eslint_d", "eslint" } },
-	-- typescriptreact = { { "eslint_d", "eslint" } },
-	-- svelte = { "eslint_d" },
-	python = { "flake8" },
 	["*"] = { "cspell", "codespell" },
 }
 local pattern = "[^:]+:(%d+):(%d+):(%w+):(.+)"

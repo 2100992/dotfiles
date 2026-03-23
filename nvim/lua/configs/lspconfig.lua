@@ -1,4 +1,4 @@
--- DEFAULTS
+-- defaults
 require("nvchad.configs.lspconfig").defaults()
 
 -- lsps with default config
@@ -10,7 +10,6 @@ local servers = {
 	"html",
 	"cssls",
 	"ts_ls",
-	"pyright",
 	"docker_compose_language_service",
 	"dockerls",
 }
@@ -26,3 +25,4 @@ end
 vim.lsp.enable(servers)
 
 require("configs.lsp.vue")
+require("configs.lsp.python")

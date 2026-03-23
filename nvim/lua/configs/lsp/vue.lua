@@ -8,7 +8,14 @@ local vue_plugin = {
 	configNamespace = "typescript",
 }
 
+local on_attach = require("nvchad.configs.lspconfig").on_attach
+local on_init = require("nvchad.configs.lspconfig").on_init
+local capabilities = require("nvchad.configs.lspconfig").capabilities
+
 local vtsls_config = {
+	on_attach = on_attach,
+	on_init = on_init,
+	capabilities = capabilities,
 	settings = {
 		vtsls = {
 			tsserver = {
@@ -21,7 +28,11 @@ local vtsls_config = {
 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 }
 
+vim.lsp.config("vtsls", vtsls_config)
+
 local vue_ls_config = {
+	on_attach = on_attach,
+	capabilities = capabilities,
 	on_init = function(client)
 		client.handlers["tsserver/request"] = function(_, result, context)
 			local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
@@ -53,6 +64,6 @@ local vue_ls_config = {
 		end
 	end,
 }
-vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
+
 vim.lsp.enable({ "vtsls", "vue_ls" })

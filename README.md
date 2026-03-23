@@ -1,229 +1,142 @@
-## ZSH aliases
+# Dotfiles
 
-### Change directory
+Personal configurations for Neovim, Zsh, Tmux, Vim, and terminal emulators.
 
+## Quick Install
 
-`cdd` – `cd ~/Downloads`
-
-`cdw` – `cd ~/Work`
-
-**Zoxide**
-
-```
-z <anything>
+```bash
+git clone https://github.com/shvetsov/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./install.sh  # or manually symlink
 ```
 
-### Git commands
-
-
-`gs` – `git status --short`  
-
-`ga` – `git add`
-
----
-
-`gb` – `git branch`  
-
-`gc` – `git checkout`
-
-`gme` – `git merge`
-
-`gd` – `git diff`
-
-`gcp` - `git cherry-pick`
-
----
-
-`gl` – `git log`
-
-`glp` – `git log -p`
-
-`gln` – `git log --name-only`
-
----
-
-`gcv` – `git commit -v`
-
-`gcm` – `git commit -m`
-
-`gca` – `git commit --amend`
-
----
-
-`gplo` – `git pull origin`
-
-`gpso` – `git push origin`
-
-`gpsov` - `git push --no-verify origin`
-
-`gpsof` - `git push --force origin`
-
-`gpsofv` - `git push --force --no-verify origin`
-
-`gpsovf` - `git push --force --no-verify origin`
-
----
-
-`gda` - `git diff --color --name-only --diff-filter=A`
-
-`gdm` - `git diff --color --name-only --diff-filter=M`
-
-`gdd` - `git diff --color --name-only --diff-filter=D`
-
-
-## Software version management
-
-**Use RTX**
-
-`rtx`
-
-
-## Ripgrep
+## Structure
 
 ```
-rg -l – rgl
+.dotfiles/
+├── nvim/              # Neovim (NvChad-based)
+├── .zshrc             # Zsh config
+├── .bashrc            # Bash config
+├── .tmux.conf         # Tmux config
+├── .vimrc             # Vim config
+├── alacritty.yml      # Alacritty terminal
+├── kitty.conf         # Kitty terminal
+├── .wezterm.lua       # Wezterm terminal
+├── .shared_aliases    # Shared shell aliases
+├── .zsh_functions/    # Zsh functions
+└── bin/               # Scripts
 ```
-
-
-## Docker
-
-```
-docker ps – dps
-```
-
 
 ## Neovim
 
-**Install**
+**Install plugins**: Open Neovim and run `:Lazy` then `:Sync`
 
+### Keybindings
+
+Leader key: `<Space>`
+
+| Key | Action |
+|-----|--------|
+| `<Space>w` | Save file |
+| `<Space>/` | Clear search highlights |
+| `<Space>fp` | Copy file path |
+| `<Space>b` | Telescope buffers |
+| `<Space>o` | Telescope find files |
+| `<Space>sb` | Telescope current buffer fuzzy |
+| `<Space>sp` | Telescope live grep |
+| `<Space>f` | Telescope file browser |
+| `<Space>i` | Telescope git status |
+| `<Space><Space>w` | Hop hint words |
+| `<Space><Space>l` | Hop hint lines |
+| `<C-b>` | NvimTree toggle |
+| `gd` | Go to definition |
+| `gr` | References |
+| `K` | Hover documentation |
+| `[d` / `]d` | Prev/next diagnostic |
+| `<Space>q` | LSP diagnostics list |
+| `<Space>rn` | LSP rename |
+| `<Space>ca` | LSP code action |
+| `<Space>so` | LSP symbols |
+| `<Space>S` | Spectre search |
+| `<Space>SW` | Spectre search current word |
+
+### Gitsigns
+
+| Key | Action |
+|-----|--------|
+| `<leader>gnh` | Next hunk |
+| `<leader>gph` | Prev hunk |
+| `<leader>gh` | Preview hunk inline |
+
+### Testing (pytest)
+
+```vim
+:Pytest           " Run all tests in file
+:Pytest args="-k test_name"  " Run specific tests
 ```
-:PackerInstall
-```
 
-**Hotkeys:**
+## Zsh Aliases
 
-Leader key - ```<Space>```
+### Git
 
-```
-:w – <Space> + w
-:noh – <Space> + /
-:StripWhitespace – <Space> + s
-Copy file local path – <Space> + fp
-Telescope: Buffers – <Space> + b
-Telescope: Find files – <Space> + o
-Telescope: Current Buffer Fuzzy find – <Space> + sb
-Telescope: Live grep – <Space> + sp
-Telescope: File Browser – <Space> + f
-Telescope: Git Status – <Space> + i
-Telescope: Git Status – <Space> + i
-Hop: Hint Words – <Space><Space> + w
-Hop: Hint Lines – <Space><Space> + l
-Nvim Tree Find File Toggle - <C-b>
+| Alias | Command |
+|-------|---------|
+| `gs` | `git status --short` |
+| `ga` | `git add` |
+| `gb` | `git branch` |
+| `gc` | `git checkout` |
+| `gme` | `git merge` |
+| `gd` | `git diff` |
+| `gcp` | `git cherry-pick` |
+| `gl` | `git log` |
+| `glp` | `git log -p` |
+| `gln` | `git log --name-only` |
+| `gcv` | `git commit -v` |
+| `gcm` | `git commit -m` |
+| `gca` | `git commit --amend` |
+| `gplo` | `git pull origin` |
+| `gpso` | `git push origin` |
+| `gpsof` | `git push --force origin` |
+| `gda/gdm/gdd` | Diff added/modified/deleted |
 
-Buf: Go to definition – gd
-Buf: References – gr
-Buf: Go to definition – K
-Buf: Go to prev diag – [d
-Buf: Go to next diag – ]d
-Buf: LSP diag list – <Space>q
-Buf: LSP rename – <Space>rn
-Buf: LSP code action – <Space>ca
-Buf: LSP symbols – <Space>so
+### Navigation
 
-Spectre Search - <Space>S
-Spectre Search Current Word - <Space>SW
-Spectre Search Current Word on Current File- <Space>SP
-* - use <space>c to confirm replacement
-```
+| Alias | Command |
+|-------|---------|
+| `cdd` | `cd ~/Downloads` |
+| `cdw` | `cd ~/Work` |
+| `z` | zoxide integration |
 
-**Plugins:**
+### Other
 
-  - wbthomason/packer.nvim
-  - b3nj5m1n/kommentary
-  - nvim-telescope/telescope.nvim
-  -     nvim-lua/popup.nvim
-  -     nvim-lua/plenary.nvim
-  - sainnhe/everforest
-  - kyazdani42/nvim-web-devicons
-  - feline-nvim/feline.nvim
-  - lukas-reineke/indent-blankline.nvim
-  - lewis6991/gitsigns.nvim
-  -     nvim-lua/plenary.nvim
-  - nvim-treesitter/nvim-treesitter
-  - nvim-treesitter/nvim-treesitter-textobjects
-  - neovim/nvim-lspconfig
-  - hrsh7th/nvim-cmp
-  -     hrsh7th/cmp-nvim-lsp
-  -     hrsh7th/cmp-buffer
-  -     hrsh7th/cmp-path
-  -     hrsh7th/cmp-cmdline
-  - phaazon/hop.nvim
-  - ntpeters/vim-better-whitespace
-  - alvan/vim-closetag
-  - rafamadriz/friendly-snippets
-  - L3MON4D3/LuaSnip
-  -     saadparwaiz1/cmp_luasnip
-  - editorconfig/editorconfig-vim
-  - kyazdani42/nvim-tree.lua
-  - nathom/filetype.nvim
-  - Pocco81/auto-save.nvim
-  - AndrewRadev/splitjoin.vim
-  - nvim-pack/nvim-spectre
+| Alias | Command |
+|-------|---------|
+| `dps` | `docker ps` |
+| `rgl` | `rg -l` |
+
+## Tmux
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+b v` | Split horizontal |
+| `Ctrl+b s` | Split vertical |
+| `Ctrl+b C` | New window |
+| `Ctrl+b j/k/h/l` | Navigate panes |
+| `v` / `y` | Copy mode selection |
 
 ## Vim
 
-**Install**
+Plugins are managed with [vim-plug](https://github.com/junegunn/vim-plug).
 
+**Install plugins**:
 ```
 :PlugInstall
 ```
 
-**Hotkeys:**
+## Terminals
 
-```
-:w – <Space> + w
-:noh – <Space> + /
-:StripWhitespace – <Space> + s
-Copy file local path – <Space> + fp
-:Buffers – <Space> + b
-:GFiles – <Space> + o
-:Commits – <Space> + fc
-:Files – <Space> + ff
-:Tags – <Space> + ft
-:Rg – <Space> + fa
-:Commands – <Space> + p
-:tabnew – <Space> + t
-Easymotion – <Space><Space> + w
-Easymotion – <Space><Space> + b
-NNN – <Space>n
-```
+- **Alacritty**: `alacritty.yml` / `alacritty.toml`
+- **Kitty**: `kitty.conf`
+- **Wezterm**: `.wezterm.lua`
 
-**Plugins:**
-
-  - junegunn/fzf
-  - junegunn/fzf.vim
-  - tpope/vim-fugitive
-  - vim-airline/vim-airline
-  - ntpeters/vim-better-whitespace
-  - tpope/vim-commentary
-  - joshdick/onedark.vim
-  - airblade/vim-gitgutter
-  - easymotion/vim-easymotion
-  - tmux-plugins/vim-tmux-focus-events
-  - editorconfig/editorconfig-vim
-
-
-## Alacritty
-
-Theme configuration. Use JetBrains Mono font.
-
-
-## Tmux
-
-**Hotkeys:**
-
-```
-Ctrl+b " – split panels horizontally
-Ctrl+b % – split panels vertically
-Ctrl+b C – new window
-```
+Font: JetBrains Mono

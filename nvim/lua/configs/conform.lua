@@ -4,6 +4,7 @@ local options = {
 		css = { "prettierd" },
 		html = { "prettierd" },
 		json = { "prettierd", "prettier", "fixjson" },
+		-- python = { "ruff_format", "ruff_fix" },
 		python = { "isort", "autopep8" },
 		javascript = {
 			"prettierd",
@@ -47,6 +48,14 @@ local options = {
 				"--ignore=E402",
 			},
 		},
+		-- ruff_format = {
+		-- 	command = "ruff",
+		-- 	args = { "format", "--stdin-filename", "$FILENAME", "-" },
+		-- },
+		-- ruff_fix = {
+		-- 	command = "ruff",
+		-- 	args = { "check", "--fix", "--stdin-filename", "$FILENAME", "-" },
+		-- },
 	},
 }
 
