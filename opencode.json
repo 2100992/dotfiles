@@ -3,55 +3,61 @@
   "permission": {
     "*": "ask",
     "bash": {
-      "*": "ask",
-      "git *": "allow",
-      "npm *": "allow",
-      "rm *": "deny",
-      "grep *": "allow"
+      "*": "ask"
     },
-    "read": "allow",
-    "list": "allow",
-    "glob": "allow",
+    "list": {
+      "*": "ask",
+      "~/**": "ask"
+    },
+    "glob": {
+      "*": "ask",
+      "~/**": "ask"
+    },
+    "read": {
+      "*": "ask",
+      "~/**": "ask",
+      "~/**/.env": "deny",
+      "**/.env": "deny"
+    },
     "edit": {
-      "*": "deny",
-      "/home/opencode/projects": "ask"
+      "*": "ask",
+      "~/**": "ask",
+      "~/**/.env": "deny",
+      "**/.env": "deny"
     }
   },
   "provider": {
-    "gpt2giga": {
-      "name": "gpt2giga",
+    "routerai": {
       "npm": "@ai-sdk/openai-compatible",
+      "name": "RouterAI",
       "options": {
-        "baseURL": "http://100.114.142.48:8090"
+        "baseURL": "https://routerai.ru/api/v1"
       },
       "models": {
-        "GigaChat": {
-          "name": "GigaChat"
-        }
-      }
-    },
-    "elvees_deepseek": {
-      "name": "elvees_deepseek",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://cv7gpufarm:8001/v1"
-      },
-      "models": {
-        "/models/DeepSeek-Coder": {
-          "name": "DeepSeek-Coder",
-          "tool_call": false
-        }
-      }
-    },
-    "elvees_qween": {
-      "name": "elvees_qween",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://cv7gpufarm:8001/v1"
-      },
-      "models": {
-        "/models/Qwen3-Coder": {
-          "name": "Qwen3-Coder"
+        "anthropic/claude-sonnet-4.6": {
+          "name": "Claude Sonnet 4.6"
+        },
+        "google/gemini-3.1-pro-preview": {
+          "name": "Gemini 3.1 Pro Preview"
+        },
+        "openai/gpt-5.2-codex": {
+          "name": "GPT-5.2-Codex"
+        },
+        "deepseek/deepseek-v3.2": {
+          "name": "DeepSeek DeepSeek V3.2"
+        },
+        "qwen/qwen3-coder-next": {
+          "name": "Qwen3 Coder Next"
+        },
+        "z-ai/glm-5": {
+          "name": "GLM 5"
+        },
+        "minimax/minimax-m2.5": {
+          "name": "MiniMax M2.5",
+          "limit": {
+            "context": 197000,
+            "output": 32000
+          }
         }
       }
     }
@@ -60,7 +66,6 @@
     "code-reviewer": {
       "description": "Reviews code for best practices and potential issues",
       "mode": "subagent",
-      "model": "/models/Qwen3-Coder",
       "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
       "tools": {
         "write": false,
