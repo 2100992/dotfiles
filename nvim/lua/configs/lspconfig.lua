@@ -24,5 +24,12 @@ end
 
 vim.lsp.enable(servers)
 
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  pattern = { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" },
+  callback = function()
+    vim.bo.filetype = "yaml.docker-compose"
+  end,
+})
+
 require("configs.lsp.vue")
 require("configs.lsp.python")
