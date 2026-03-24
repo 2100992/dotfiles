@@ -12,3 +12,19 @@ require("diffview").setup()
 require("gitsigns").setup()
 
 vim.g.python3_host_prog = "./.venv/bin/python"
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  pattern = {
+    "docker-compose.yaml",
+    "docker-compose.yml",
+    "docker-compose.*.yaml",
+    "docker-compose.*.yml",
+    "compose.yaml",
+    "compose.yml",
+    "compose.*.yaml",
+    "compose.*.yml",
+  },
+  callback = function()
+    vim.bo.filetype = "yaml.docker-compose"
+  end,
+})
