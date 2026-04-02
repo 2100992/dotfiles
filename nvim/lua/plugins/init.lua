@@ -218,7 +218,15 @@ return {
 		config = function()
 			---@type opencode.Opts
 			vim.g.opencode_opts = {
-				-- Your configuration, if any. Goto definition on the type or field for details.
+				events = {
+					permissions = {
+						enabled = true,
+						idle_delay_ms = 1000,
+						edits = {
+							enabled = false,
+						},
+					},
+				},
 			}
 
 			-- Required for `opts.events.reload`.

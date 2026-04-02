@@ -40,17 +40,17 @@ This is a dotfiles repository containing configuration for:
 
 ### Python (via nvim-dap + pytest)
 
-```vim
-" Run all tests in file
+```lua
+-- Run all tests in file
 :Pytest
 
-" Run single test (cursor on test function)
+-- Run single test (cursor on test function)
 :Pytest
 
-" Run tests with arguments
+-- Run tests with arguments
 :Pytest args="-k test_name"
 
-" Debug test (use DAP keybindings)
+-- Debug test (use DAP keybindings)
 ```
 
 ### Shell/Config Files
@@ -72,7 +72,7 @@ yamllint alacritty.yml
 
 1. **Use 3 spaces** for indentation in Neovim Lua
 2. **Max line length**: ~120 characters
-3. **Trailing commas** in tables/arrays
+3. **Trailing commas** in tables/arrays when appropriate
 4. **Semicolons** at end of statements when appropriate
 
 ### Neovim Lua Conventions
@@ -163,6 +163,7 @@ set -euo pipefail
 
 # Use quotes
 local_var="${HOME}/path"
+another_var="$HOME/path"
 
 # Shellcheck inline ignore if needed
 # shellcheck disable=SC2086

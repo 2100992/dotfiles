@@ -101,7 +101,6 @@ Formatters: Lua (`stylua`), Python (`isort`, `autopep8`), JS/TS/Vue/HTML/CSS/YAM
 
 ### Functions
 
-- Use `function()` syntax over `local function()` when defining methods
 - Use `vim.fn.` prefix for vimscript functions
 
 ### Keymaps
@@ -111,7 +110,7 @@ Formatters: Lua (`stylua`), Python (`isort`, `autopep8`), JS/TS/Vue/HTML/CSS/YAM
   map("n", "<leader>foo", "<cmd>Foo<CR>", { desc = "Foo command" })
   ```
 - Use `<leader>` for user keymaps
-- Use `noremap = true` (or just `n`) for non-recursive maps
+- Use `"n"` for non-recursive maps
 
 ### Plugin Configuration
 
