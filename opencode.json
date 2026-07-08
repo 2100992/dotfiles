@@ -1,76 +1,73 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "permission": {
-    "*": "ask",
-    "bash": {
-      "*": "ask"
-    },
-    "list": {
-      "*": "ask",
-      "~/**": "ask"
-    },
-    "glob": {
-      "*": "ask",
-      "~/**": "ask"
-    },
+    "list": "allow",
+    "glob": "allow",
     "read": {
-      "*": "ask",
-      "~/**": "ask",
+      "*": "allow",
       "~/**/.env": "deny",
-      "**/.env": "deny"
+      "**/.env": "deny",
+      "~/**/.ssh/**": "deny",
+      "**/.ssh/**": "deny",
+      "~/**/.gnupg/**": "deny",
+      "**/.gnupg/**": "deny"
     },
     "edit": {
       "*": "ask",
-      "~/**": "ask",
+      "~/dotfiles/**": "allow",
+      "~/dotfiles/.git/**": "deny",
       "~/**/.env": "deny",
-      "**/.env": "deny"
-    }
-  },
-  "provider": {
-    "routerai": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "RouterAI",
-      "options": {
-        "baseURL": "https://routerai.ru/api/v1"
-      },
-      "models": {
-        "anthropic/claude-sonnet-4.6": {
-          "name": "Claude Sonnet 4.6"
-        },
-        "google/gemini-3.1-pro-preview": {
-          "name": "Gemini 3.1 Pro Preview"
-        },
-        "openai/gpt-5.2-codex": {
-          "name": "GPT-5.2-Codex"
-        },
-        "deepseek/deepseek-v3.2": {
-          "name": "DeepSeek DeepSeek V3.2"
-        },
-        "qwen/qwen3-coder-next": {
-          "name": "Qwen3 Coder Next"
-        },
-        "z-ai/glm-5": {
-          "name": "GLM 5"
-        },
-        "minimax/minimax-m2.5": {
-          "name": "MiniMax M2.5",
-          "limit": {
-            "context": 197000,
-            "output": 32000
-          }
-        }
-      }
-    }
+      "**/.env": "deny",
+      "~/**/.ssh/**": "deny",
+      "**/.ssh/**": "deny"
+    },
+    "write": {
+      "*": "ask",
+      "~/dotfiles/**": "allow",
+      "~/**/.env": "deny",
+      "**/.env": "deny",
+      "~/**/.ssh/**": "deny",
+      "**/.ssh/**": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "ls": "allow",
+      "ls *": "allow",
+      "pwd": "allow",
+      "cat *": "allow",
+      "rg *": "allow",
+      "grep *": "allow",
+      "git status": "allow",
+      "git status *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git log": "allow",
+      "git log *": "allow",
+      "git show *": "allow"
+    },
+    "webfetch": "ask"
   },
   "agent": {
     "code-reviewer": {
       "description": "Reviews code for best practices and potential issues",
       "mode": "subagent",
-      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
-      "tools": {
-        "write": false,
-        "edit": false
-      }
+      "temperature": 0.1,
+      "permission": {
+        "read": "allow",
+        "edit": "deny",
+        "write": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "*": "deny",
+          "git diff *": "allow",
+          "git log *": "allow",
+          "git show *": "allow",
+          "rg *": "allow",
+          "grep *": "allow",
+          "cat *": "allow"
+        }
+      },
+      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability."
     }
   }
 }

@@ -7,9 +7,27 @@ end, { desc = "Ask opencode…" })
 map({ "n", "x" }, "<C-x>", function()
 	require("opencode").select()
 end, { desc = "Execute opencode action…" })
-map({ "n", "t" }, "<leader>o", function()
-	require("opencode").toggle()
-end, { desc = "Toggle opencode" })
+local POSITIONS = { "right", "left", "top", "bottom", "float" }
+local current_position = "right"
+
+local function opencode_toggle()
+	require("snacks.terminal").toggle("opencode --port", {
+		win = { position = current_position, enter = false },
+	})
+end
+
+local function opencode_pick_position()
+	vim.ui.select(POSITIONS, { prompt = "Opencode terminal position" }, function(choice)
+		if not choice then
+			return
+		end
+		current_position = choice
+		vim.notify("Opencode terminal position: " .. choice)
+	end)
+end
+
+map({ "n", "t" }, "<leader>o", opencode_toggle, { desc = "Toggle opencode" })
+map("n", "<leader>op", opencode_pick_position, { desc = "Opencode: set terminal position" })
 
 map({ "n", "x" }, "go", function()
 	return require("opencode").operator("@this ")
