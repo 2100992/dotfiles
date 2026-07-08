@@ -5,6 +5,9 @@ alias n='nvim'
 # Tmux
 alias tn='tmux new -s'
 
+# Kitty
+alias s='kitten ssh'
+
 
 # Ripgrep aliases
 alias rgl='rg -l'
