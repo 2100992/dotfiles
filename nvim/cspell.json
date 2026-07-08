@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,ru",
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/venv/**",
+    "**/.venv/**",
+    "*.lock",
+    "*.min.js"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "ru-ru",
+      "path": "~/.local/share/nvim/mason/packages/cspell/node_modules/@cspell/dict-ru_ru/ru_ru.trie.gz"
+    }
+  ],
+  "dictionaries": [
+    "ru-ru"
+  ],
+  "words": [],
+  "flagWords": []
+}

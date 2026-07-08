@@ -9,9 +9,7 @@ M.ui = {
 	statusline = {
 		theme = "vscode_colored",
 	},
-	{
-		lazyload = false,
-	},
+	lazyload = false,
 }
 M.base46 = {
 	theme = "ayu_dark",

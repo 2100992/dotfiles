@@ -1,6 +1,7 @@
 local lint = require("lint")
 
 lint.linters_by_ft = {
+	python = { "flake8" },
 	javascript = {
 		"eslint_d",
 	},
@@ -10,11 +11,9 @@ lint.linters_by_ft = {
 	vue = {
 		"eslint_d",
 	},
+	markdown = { "cspell", "codespell" },
 	["*"] = { "cspell", "codespell" },
 }
-local pattern = "[^:]+:(%d+):(%d+):(%w+):(.+)"
-local groups = { "lnum", "col", "code", "message" }
-local binary_name = "eslint_d"
 
 lint.linters = {
 	flake8 = {
@@ -32,15 +31,20 @@ lint.linters = {
 			"-",
 		},
 		ignore_exitcode = true,
-		parser = require("lint.parser").from_pattern(pattern, groups, nil, {
+		parser = require("lint.parser").from_pattern("[^:]+:(%d+):(%d+):(%w+):(.+)", {
+			"lnum",
+			"col",
+			"code",
+			"message",
+		}, nil, {
 			["source"] = "flake8",
 			["severity"] = vim.diagnostic.severity.WARN,
 		}),
 	},
 	eslint_d = {
 		cmd = function()
-			local local_binary = vim.fn.fnamemodify("./node_modules/.bin/" .. binary_name, ":p")
-			return vim.loop.fs_stat(local_binary) and local_binary or binary_name
+			local local_binary = vim.fn.fnamemodify("./node_modules/.bin/" .. "eslint_d", ":p")
+			return vim.loop.fs_stat(local_binary) and local_binary or "eslint_d"
 		end,
 		args = {
 			"--format",
@@ -57,10 +61,45 @@ lint.linters = {
 		parser = function(output, bufnr)
 			local result = require("lint.linters.eslint").parser(output, bufnr)
 			for _, d in ipairs(result) do
-				d.source = binary_name
+				d.source = "eslint_d"
 			end
 			return result
 		end,
+	},
+	cspell = {
+		cmd = "cspell",
+		stdin = true,
+		stream = "stderr",
+		args = {
+			"lint",
+			"--no-progress",
+			"--config",
+			vim.fn.stdpath("config") .. "/cspell.json",
+			"stdin",
+		},
+		ignore_exitcode = true,
+		parser = require("lint.parser").from_pattern(":(%d+):(%d+)%s+-%s+(.+)", {
+			"lnum",
+			"col",
+			"message",
+		}, nil, {
+			["source"] = "cspell",
+		}),
+	},
+	codespell = {
+		cmd = "codespell",
+		stdin = true,
+		args = {
+			"-",
+		},
+		ignore_exitcode = true,
+		parser = require("lint.parser").from_pattern("[^:]+:(%d+):(%d+): (.+)", {
+			"lnum",
+			"col",
+			"message",
+		}, nil, {
+			["source"] = "codespell",
+		}),
 	},
 }
 
