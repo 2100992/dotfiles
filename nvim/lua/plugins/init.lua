@@ -19,13 +19,17 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
-				"html-lsp",
-				"css-lsp",
-				"pyright",
-				"docker_compose_language_service",
-				"dockerls",
-				"vue_ls",
-				"vtsls",
+				"prettierd",
+				"autopep8",
+				"isort",
+				"beautysh",
+				"taplo",
+				"flake8",
+				"eslint_d",
+				"cspell",
+				"codespell",
+				"debugpy",
+				"ruff",
 			},
 			ui = {
 				icons = {
@@ -37,7 +41,27 @@ return {
 		},
 	},
 	{
+		"WhoIsSethDaniel/mason-lspconfig.nvim",
+		event = "VeryLazy",
+		dependencies = { "mason-org/mason.nvim" },
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"html",
+					"cssls",
+					"pyright",
+					"docker_compose_language_service",
+					"vtsls",
+					"volar",
+					"yamlls",
+				},
+				automatic_enable = true,
+			})
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		opts = {
 			ensure_installed = {
 				"vim",
@@ -100,12 +124,7 @@ return {
 			end
 		end,
 	},
-	{
-		"mfussenegger/nvim-dap",
-		config = function(_, opts)
-			-- require("core.utils").load_mappings("dap")
-		end,
-	},
+	{ "mfussenegger/nvim-dap" },
 	{
 		"mfussenegger/nvim-dap-python",
 		ft = "python",
@@ -118,57 +137,6 @@ return {
 			require("configs.dap")
 		end,
 	},
-	-- {
-	-- 	"Exafunction/windsurf.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"hrsh7th/nvim-cmp",
-	-- 	},
-	-- 	config = function()
-	-- 		require("codeium").setup({
-	-- 			enable_cmp_source = false,
-	-- 			virtual_text = {
-	-- 				enabled = true,
-	--
-	-- 				-- These are the defaults
-	--
-	-- 				-- Set to true if you never want completions to be shown automatically.
-	-- 				manual = false,
-	-- 				-- A mapping of filetype to true or false, to enable virtual text.
-	-- 				filetypes = {},
-	-- 				-- Whether to enable virtual text of not for filetypes not specifically listed above.
-	-- 				default_filetype_enabled = true,
-	-- 				-- How long to wait (in ms) before requesting completions after typing stops.
-	-- 				idle_delay = 75,
-	-- 				-- Priority of the virtual text. This usually ensures that the completions appear on top of
-	-- 				-- other plugins that also add virtual text, such as LSP inlay hints, but can be modified if
-	-- 				-- desired.
-	-- 				virtual_text_priority = 65535,
-	-- 				-- Set to false to disable all key bindings for managing completions.
-	-- 				map_keys = true,
-	-- 				-- The key to press when hitting the accept keybinding but no completion is showing.
-	-- 				-- Defaults to \t normally or <c-n> when a popup is showing.
-	-- 				accept_fallback = nil,
-	-- 				-- Key bindings for managing completions in virtual text mode.
-	-- 				key_bindings = {
-	-- 					-- Accept the current completion.
-	-- 					accept = "<M-enter>",
-	-- 					-- Accept the next word.
-	-- 					accept_word = "<M-l>",
-	-- 					-- Accept the next line.
-	-- 					accept_line = "<M-k>",
-	-- 					-- Clear the virtual text.
-	-- 					clear = false,
-	-- 					-- Cycle to the next completion.
-	-- 					next = "<M-]>",
-	-- 					-- Cycle to the previous completion.
-	-- 					prev = "<M-[>",
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- 	event = "BufEnter",
-	-- },
 	{
 		"2100992/nvim.ai",
 		version = "*",
@@ -195,9 +163,6 @@ return {
 		},
 	},
 
-	-- test new blink
-	-- { import = "nvchad.blink.lazyspec" },
-
 	{
 		"Wansmer/langmapper.nvim",
 		lazy = false,
@@ -213,7 +178,10 @@ return {
 			-- Recommended for `ask()` and `select()`.
 			-- Required for `snacks` provider.
 			---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
-			{ "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+			{
+				"folke/snacks.nvim",
+				opts = { input = { enabled = true }, picker = { enabled = true }, terminal = { enabled = true } },
+			},
 		},
 		config = function()
 			---@type opencode.Opts
@@ -231,7 +199,6 @@ return {
 
 			-- Required for `opts.events.reload`.
 			vim.o.autoread = true
-
 		end,
 	},
 }

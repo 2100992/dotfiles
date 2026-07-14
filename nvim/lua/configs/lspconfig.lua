@@ -3,24 +3,13 @@ require("nvchad.configs.lspconfig").defaults()
 
 -- lsps with default config
 local on_attach = require("nvchad.configs.lspconfig").on_attach
-local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
 
-local servers = {
-	"html",
-	"cssls",
-	"ts_ls",
-	"docker_compose_language_service",
-	"dockerls",
-  "yamlls"
-}
+local servers = { "html", "cssls", "docker_compose_language_service", "yamlls" }
 
 for _, lsp in ipairs(servers) do
-	vim.lsp.config[lsp] = {
+	vim.lsp.config(lsp, {
 		on_attach = on_attach,
-		on_init = on_init,
-		capabilities = capabilities,
-	}
+	})
 end
 
 vim.lsp.enable(servers)

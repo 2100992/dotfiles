@@ -1,8 +1,5 @@
 local dap_python = require("dap-python")
-local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
--- local path = "/usr/local/bin/python"
--- local path = "python"
-dap_python.setup(path)
+dap_python.setup("python")
 
 local dap = require("dap")
 
