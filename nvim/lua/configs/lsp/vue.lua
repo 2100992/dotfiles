@@ -1,7 +1,10 @@
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 
-local vue_language_server_path = vim.fn.stdpath("data")
-	.. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+local mason_pkgs = vim.fn.stdpath("data") .. "/mason/packages"
+
+local vue_language_server_path = mason_pkgs .. "/vue-language-server/node_modules/@vue/language-server"
+
+local typescript_path = mason_pkgs .. "/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib"
 
 local vue_plugin = {
 	name = "@vue/typescript-plugin",
@@ -21,11 +24,15 @@ vim.lsp.config("vtsls", {
 				},
 			},
 		},
+		typescript = {
+			tsdk = typescript_path,
+		},
 	},
 })
 
-vim.lsp.config("volar", {
+vim.lsp.config("vue_ls", {
 	on_attach = on_attach,
+	cmd = { "vue-language-server", "--stdio", "--tsdk=" .. typescript_path },
 	filetypes = { "vue" },
 	settings = {
 		vue = {
@@ -34,4 +41,4 @@ vim.lsp.config("volar", {
 	},
 })
 
-vim.lsp.enable({ "vtsls", "volar" })
+vim.lsp.enable({ "vtsls", "vue_ls" })

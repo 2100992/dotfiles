@@ -30,6 +30,7 @@ return {
 				"codespell",
 				"debugpy",
 				"ruff",
+				"vue-language-server",
 			},
 			ui = {
 				icons = {
@@ -52,7 +53,6 @@ return {
 					"pyright",
 					"docker_compose_language_service",
 					"vtsls",
-					"volar",
 					"yamlls",
 				},
 				automatic_enable = true,
