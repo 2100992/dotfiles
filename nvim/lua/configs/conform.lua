@@ -22,6 +22,9 @@ local options = {
 			"prettierd",
 			-- { "prettierd", "prettier" },
 		},
+		sh = {
+			"beautysh",
+		},
 		bash = {
 			"beautysh",
 		},
