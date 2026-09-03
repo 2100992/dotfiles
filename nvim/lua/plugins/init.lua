@@ -201,4 +201,16 @@ return {
 			vim.o.autoread = true
 		end,
 	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-mini/mini.icons",
+		},
+		ft = { "markdown", "markdown_inline" },
+		priority = 100,
+		---@module "render-markdown"
+		---@type render.md.UserConfig
+		opts = {},
+	},
 }
