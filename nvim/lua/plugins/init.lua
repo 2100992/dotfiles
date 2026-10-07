@@ -189,16 +189,12 @@ return {
 				events = {
 					permissions = {
 						enabled = true,
-						idle_delay_ms = 1000,
 						edits = {
 							enabled = false,
 						},
 					},
 				},
 			}
-
-			-- Required for `opts.events.reload`.
-			vim.o.autoread = true
 		end,
 	},
 	{

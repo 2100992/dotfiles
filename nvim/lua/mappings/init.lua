@@ -13,6 +13,10 @@ map("n", "K", function()
 	vim.lsp.buf.hover({ border = "single", max_height = 25, max_width = 120 })
 end, { desc = "Hover documentation" })
 
+-- Increment/decrement: <C-a>/<C-x> are taken by the opencode mappings.
+map("n", "+", "<C-a>", { desc = "Increment under cursor" })
+map("n", "-", "<C-x>", { desc = "Decrement under cursor" })
+
 -- Gitsigns
 map("n", "<leader>gnh", "<cmd>Gitsigns next_hunk<CR>", { desc = "next_hunk" })
 map("n", "<leader>gph", "<cmd>Gitsigns prev_hunk<CR>", { desc = "prev_hunk" })

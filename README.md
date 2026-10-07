@@ -75,6 +75,49 @@ Leader key: `<Space>`
 :Pytest args="-k test_name"  " Run specific tests
 ```
 
+## OpenCode
+
+Config lives in the repo and is exposed to OpenCode through symlinks in `~/.config/opencode/`.
+
+| Repo file | Symlink target | Purpose |
+|-----------|----------------|---------|
+| `opencode.json` | `~/.config/opencode/opencode.json` | Agent config: model, default agent, permissions, providers, commands |
+| `cli.json` | `~/.config/opencode/cli.json` | TUI settings: sidebar, scrollbar, thinking blocks, animations, tabs |
+
+### Setup
+
+```bash
+mkdir -p ~/.config/opencode
+ln -sfn ~/dotfiles/opencode.json ~/.config/opencode/opencode.json
+ln -sfn ~/dotfiles/cli.json     ~/.config/opencode/cli.json
+```
+
+`ln -sfn` overwrites an existing symlink in place. Use the real repo path if your clone is not at `~/dotfiles`.
+
+### Notes
+
+- OpenCode v2 reads TUI settings from `cli.json`, **not** `tui.json`. Older setups used `tui.json`; v2 migrates it into `cli.json` and `~/.local/state/opencode/kv.json` on first run, then ignores it. If a stale `~/.config/opencode/tui.json` symlink exists, remove it.
+- Edit the repo files, never the ones in `~/.config/opencode/`. Writes through a symlink land in the repo, which is the point.
+- `service.json` (mode `600`) is generated state and is intentionally not symlinked or committed.
+- Permission rules in `opencode.json` use a wildcard matcher, not globs: `*` matches any character including `/`, `?` matches exactly one. There is no distinct `**` — it is just two `*`. `~` and `$HOME` expand at the start of a pattern, and **last matching rule wins**, so a catch-all `"*"` goes first and specific rules follow.
+- `external_directory` guards paths outside the working directory and defaults to `ask`. It is what stops the agent from wandering into `~/.ssh`, `~/.gnupg`, or any other path outside the project.
+- Verify a rule actually fires rather than assuming: ask the agent to touch a denied path and watch for the prompt or the block.
+
+### Neovim integration
+
+`nvim/lua/mappings/opencode.lua` wires the plugin (`nickjvandyke/opencode.nvim`) to this setup:
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<C-a>` | normal, visual | Ask OpenCode with `@this:` pre-filled |
+| `<C-x>` | normal, visual | Open the action picker |
+| `<C-^>` | normal, terminal | Toggle the OpenCode terminal |
+| `<Space>op` | normal | Pick terminal position (right/left/top/bottom/float) |
+| `go` | normal, visual | Copy `@this` range reference to the clipboard, then paste into the TUI |
+| `goo` | normal | Same, linewise |
+
+`go`/`goo` copy instead of sending on purpose. The plugin targets the most recently updated session, so a prompt sent from Neovim can land in a tab you are not looking at. Copying lets you review and comment before submitting.
+
 ## Zsh Aliases
 
 ### Git

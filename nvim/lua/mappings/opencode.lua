@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 map({ "n", "x" }, "<C-a>", function()
-	require("opencode").ask("@this: ", { submit = true })
+	require("opencode").ask("@this: ")
 end, { desc = "Ask opencode…" })
 
 map({ "n", "x" }, "<C-x>", function()
@@ -11,7 +11,7 @@ local POSITIONS = { "right", "left", "top", "bottom", "float" }
 local current_position = "right"
 
 local function opencode_toggle()
-	require("snacks.terminal").toggle("opencode --port", {
+	require("snacks.terminal").toggle("opencode", {
 		win = { position = current_position, enter = false },
 	})
 end
@@ -26,23 +26,52 @@ local function opencode_pick_position()
 	end)
 end
 
-map({ "n", "t" }, "<leader>o", opencode_toggle, { desc = "Toggle opencode" })
+map({ "n", "t" }, "<C-^>", opencode_toggle, { desc = "Toggle opencode" })
 map("n", "<leader>op", opencode_pick_position, { desc = "Opencode: set terminal position" })
 
+-- Pseudo-context for local rendering: only `buf`, `cursor`, `range` and the `Context`
+-- methods are needed. No server — none of the context builders touch it.
+local function render_prompt(prompt, range)
+	local Context = require("opencode.context")
+	local context = setmetatable({
+		buf = vim.api.nvim_get_current_buf(),
+		cursor = vim.api.nvim_win_get_cursor(0),
+		range = range,
+	}, { __index = Context })
+
+	return context:render(prompt).output:plaintext()
+end
+
+-- opencode.nvim always targets the most recently updated session, so sending from Neovim
+-- can land in a tab you are not looking at. Copy the reference instead and paste it into
+-- the TUI yourself, so you can edit it and add a comment before submitting.
+_G.opencode_copy_operator = function(kind) ---@param kind "char" | "line" | "block"
+	local from = vim.api.nvim_buf_get_mark(0, "[")
+	local to = vim.api.nvim_buf_get_mark(0, "]")
+	if from[1] > to[1] or (from[1] == to[1] and from[2] > to[2]) then
+		from, to = to, from
+	end
+
+	local text = render_prompt("@this ", {
+		from = { from[1], from[2] },
+		to = { to[1], to[2] },
+		kind = kind,
+	})
+	vim.fn.setreg("+", text)
+
+	local terminal = require("snacks.terminal").get("opencode", { create = false })
+	if terminal then
+		terminal:show():focus()
+	end
+
+	vim.notify(text .. "  Ctrl+V in TUI", vim.log.levels.INFO)
+end
+
 map({ "n", "x" }, "go", function()
-	return require("opencode").operator("@this ")
-end, { desc = "Add range to opencode", expr = true })
+	vim.o.operatorfunc = "v:lua.opencode_copy_operator"
+	return "g@"
+end, { desc = "Copy opencode range reference", expr = true })
 map("n", "goo", function()
-	return require("opencode").operator("@this ") .. "_"
-end, { desc = "Add line to opencode", expr = true })
-
-map("n", "<S-C-u>", function()
-	require("opencode").command("session.half.page.up")
-end, { desc = "Scroll opencode up" })
-map("n", "<S-C-d>", function()
-	require("opencode").command("session.half.page.down")
-end, { desc = "Scroll opencode down" })
-
--- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap).
-map("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
-map("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
+	vim.o.operatorfunc = "v:lua.opencode_copy_operator"
+	return "g@_"
+end, { desc = "Copy opencode line reference", expr = true })

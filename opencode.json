@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "default_agent": "plan",
   "permission": {
     "list": "allow",
     "glob": "allow",
@@ -11,6 +12,11 @@
       "**/.ssh/**": "deny",
       "~/**/.gnupg/**": "deny",
       "**/.gnupg/**": "deny"
+    },
+    "external_directory": {
+      "*": "ask",
+      "~/**/.ssh/**": "deny",
+      "~/**/.gnupg/**": "deny"
     },
     "edit": {
       "*": "ask",
